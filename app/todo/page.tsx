@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useLocalStorageTodo, Todo } from '@/app/useLocalStorageTodo';
+import { useLocalStorageTodo, Todo } from '@/hooks/useLocalStorageTodo';
 
 export default function TodoDashboard() {
   const [todos, setTodos, isLoaded] = useLocalStorageTodo();
