@@ -1,5 +1,6 @@
 "use client"
 
+import MemoEditor from "./memo/page"
 import TodoDashboard from "./todo/page"
 
 const Dashboard = () => {
@@ -7,6 +8,7 @@ const Dashboard = () => {
   return(
     <>
       <TodoDashboard/>
+      <MemoEditor/>
     </>
   )
 }
