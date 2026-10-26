@@ -68,71 +68,74 @@ export default function TodoDashboard() {
   }
 
   return (
-    <div id="dashboard-view" className="p-5 max-w-2xl font-sans">
-      <h2>作業ダッシュボード (ToDo)</h2>
+    <div className="font-sans h-full flex flex-col justify-between">
+      <div>
+        <h2 className="text-base font-bold mb-3 text-[#5c988e]">ToDo List</h2>
 
-      {/* 登録フォーム（ToDo内容のみ） */}
-      <form onSubmit={addTodo} className="mb-5 flex gap-2.5">
-        <input
-          type="text"
-          placeholder="新しいToDoを入力..."
-          value={newText}
-          onChange={(e) => setNewText(e.target.value)}
-          className="flex-grow p-2"
-        />
-        <button type="submit" className="px-4 py-2">追加</button>
-      </form>
+        {/* 登録フォーム */}
+        <form onSubmit={addTodo} className="mb-4 flex gap-2">
+          <input
+            type="text"
+            placeholder="新しいToDoを入力..."
+            value={newText}
+            onChange={(e) => setNewText(e.target.value)}
+            className="flex-grow p-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#5c988e]"
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 bg-[#5c988e] text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity cursor-pointer shrink-0"
+          >
+            追加
+          </button>
+        </form>
 
-      {/* ToDoリストの一覧 */}
-      <ul className="list-none p-0">
-        {todos.map((todo) => (
-          <li key={todo.id} className="mb-3 flex items-center gap-3">
-            {/* チェックボックス */}
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => toggleTodo(todo.id)}
-              className="w-[18px] h-[18px]"
-            />
-
-            {/* ToDoテキスト */}
-            <input
-              type="text"
-              value={todo.text}
-              onChange={(e) => updateTask(todo.id, e.target.value)}
-              className={`flex-grow ${todo.completed ? 'line-through text-gray-400' : 'text-black'}`}
-            />
-
-            {/* 後から入力できる作業時間インプット */}
-            <div className="flex items-center gap-1">
+        {/* ToDoリストの一覧 */}
+        <ul className="list-none p-0 space-y-2 overflow-y-auto max-h-[200px] pr-1">
+          {todos.map((todo) => (
+            <li key={todo.id} className="flex items-center gap-2.5 bg-slate-50 p-2 rounded-lg text-sm border border-gray-100">
               <input
-                type="number"
-                min="0"
-                placeholder="0"
-                value={todo.minutes || ''}
-                onChange={(e) => updateMinutes(todo.id, Number(e.target.value))}
-                className="w-[60px] p-1 text-right"
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => toggleTodo(todo.id)}
+                className="w-4 h-4 accent-[#5c988e] cursor-pointer"
               />
-              <span className="text-sm text-gray-500">分</span>
-            </div>
 
-            {/* 削除ボタン */}
-            <div>
+              <input
+                type="text"
+                value={todo.text}
+                onChange={(e) => updateTask(todo.id, e.target.value)}
+                className={`flex-grow bg-transparent focus:outline-none ${
+                  todo.completed ? 'line-through text-gray-400' : 'text-slate-800'
+                }`}
+              />
+
+              <div className="flex items-center gap-1 shrink-0">
+                <input
+                  type="number"
+                  min="0"
+                  placeholder="0"
+                  value={todo.minutes || ''}
+                  onChange={(e) => updateMinutes(todo.id, Number(e.target.value))}
+                  className="w-12 p-1 text-right bg-white border border-gray-200 rounded text-xs focus:outline-none focus:border-[#5c988e]"
+                />
+                <span className="text-xs text-gray-400">分</span>
+              </div>
+
               <button
                 onClick={() => deleteTask(todo.id)}
-                className="p-1 cursor-pointer text-red-500"
+                className="p-1 cursor-pointer text-xs text-red-400 hover:text-red-600 transition-colors shrink-0"
               >
                 削除
               </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {/* 合計時間の表示 */}
-      <div className="mt-5 pt-4 border-t-2 border-gray-300 flex justify-between font-bold text-lg">
+      <div className="mt-4 pt-3 border-t border-gray-200 flex justify-between font-bold text-sm text-slate-700">
         <span>合計作業時間</span>
-        <span>{formatTime(totalMinutes)}</span>
+        <span className="text-[#5c988e] font-mono">{formatTime(totalMinutes)}</span>
       </div>
     </div>
   );

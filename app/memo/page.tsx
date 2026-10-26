@@ -34,41 +34,48 @@ export default function MemoEditor() {
   }
 
   return (
-    <div id="dashboard-view" className="p-5 max-w-2xl font-sans">
-      {/* メニューバー（上部のプレーンな操作ボタン） */}
-      <div className="flex gap-4 mb-3 text-sm justify-end text-gray-600">
-        <span className="font-bold text-teal-600 mr-auto text-lg">Memo</span>
+    <div className="font-sans flex flex-col h-full">
+      {/* メニューバー */}
+      <div className="flex gap-3 mb-3 text-sm items-center justify-between border-b border-gray-100 pb-2 shrink-0">
+        <span className="font-bold text-[#5c988e] text-base">Memo</span>
 
-        {/* 太字ボタン */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`cursor-pointer ${editor.isActive('bold') ? 'font-bold text-black' : 'text-gray-400'}`}
-        >
-          Bold
-        </button>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            className={`cursor-pointer px-2 py-1 rounded text-xs transition-colors ${
+              editor.isActive('bold') ? 'bg-[#5c988e]/10 text-[#5c988e] font-bold' : 'text-gray-400 hover:text-gray-600'
+            }`}
+          >
+            Bold
+          </button>
 
-        {/* リストボタン */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`cursor-pointer ${editor.isActive('bulletList') ? 'font-bold text-black' : 'text-gray-400'}`}
-        >
-          • List
-        </button>
+          <button
+            type="button"
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            className={`cursor-pointer px-2 py-1 rounded text-xs transition-colors ${
+              editor.isActive('bulletList') ? 'bg-[#5c988e]/10 text-[#5c988e] font-bold' : 'text-gray-400 hover:text-gray-600'
+            }`}
+          >
+            • List
+          </button>
+        </div>
       </div>
 
-      {/* エディタ本体（インラインスタイルなし、最低限のプレーンなスタイル） */}
-      <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+      {/* エディタ本体 */}
+      <div
+        onClick={() => editor?.chain().focus().run()}
+        className="bg-slate-50 p-4 rounded-xl border border-gray-200 flex-1 overflow-y-auto cursor-text"
+      >
         <EditorContent
           editor={editor}
-          className="focus:outline-none [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mt-1"
+          className="focus:outline-none min-h-full text-sm text-slate-700 [&_.ProseMirror]:min-h-full [&_.ProseMirror]:outline-none [&_.ProseMirror]:ring-0 [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mt-1"
         />
       </div>
 
-      {/* キーボード操作の補足 */}
-      <p className="text-xs text-gray-400 mt-2">
-        ※ 箇条書き中に Tab キーで右インデント、Shift + Tab キーで左インデントができます。
+      {/* 補足メッセージ */}
+      <p className="text-[11px] text-gray-400 mt-2 shrink-0">
+        ※ 箇条書き中に Tab で右インデント、Shift + Tab で左インデントができます。
       </p>
     </div>
   );
