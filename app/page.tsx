@@ -4,6 +4,7 @@ import { useState } from "react"
 import MemoEditor from "./memo/page"
 import { PomodoroTimer } from "./timer/page"
 import TodoDashboard from "./todo/page"
+import SpotifyPlayer from "./music/page"
 
 const Dashboard = () => {
 
@@ -44,6 +45,14 @@ const Dashboard = () => {
           >
             Memo
           </button>
+          <button
+            onClick={() => setActiveTab('music')}
+            className={`px-3 py-1.5 rounded-lg transition-all ${
+              activeTab === 'music' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
+            }`}
+          >
+            Music
+          </button>
         </nav>
       </header>
 
@@ -51,19 +60,26 @@ const Dashboard = () => {
       <main className="flex-1 p-4 lg:p-6 overflow-hidden">
         {/* === PC表示 (デスクトップ：lg以上) === */}
         <div className="hidden lg:grid grid-cols-12 gap-6 h-full max-w-7xl mx-auto">
-          {/* 左カラム：タイマー & ToDo */}
+          {/* 左カラム：タイマー & Spotifyプレイヤー */}
           <div className="col-span-5 flex flex-col gap-6 h-full overflow-hidden">
             <div className="shrink-0 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
               <PomodoroTimer />
             </div>
             <div className="flex-1 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm overflow-y-auto">
-              <TodoDashboard />
+              <SpotifyPlayer />
             </div>
           </div>
 
-          {/* 右カラム：メモエディタ */}
-          <div className="col-span-7 bg-white rounded-2xl border border-gray-200 p-6 shadow-sm flex flex-col h-full overflow-hidden">
-            <MemoEditor />
+          {/* 右カラム：Todo & メモエディタ */}
+          <div className="col-span-7 flex flex-col gap-6 h-full overflow-hidden">
+            {/* Todo */}
+            <div className="flex-1 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm flex flex-col overflow-hidden">
+              <TodoDashboard />
+            </div>
+            {/* メモエディタ */}
+            <div className="flex-1 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+              <MemoEditor />
+            </div>
           </div>
         </div>
 
@@ -72,6 +88,7 @@ const Dashboard = () => {
           {activeTab === 'timer' && <PomodoroTimer />}
           {activeTab === 'todo' && <TodoDashboard />}
           {activeTab === 'memo' && <MemoEditor />}
+          {activeTab === 'music' && <SpotifyPlayer />}
         </div>
       </main>
     </div>
