@@ -19,7 +19,7 @@ export default function SpotifyPlayer() {
         <span className="font-bold text-[#5c988e] text-sm"></span>
 
         {/* ジャンル選択ボタン */}
-        <div className="flex gap-1 overflow-x-auto text-xs">
+        <div className="flex gap-1 overflow-x-auto text-xs my-3">
           {Object.keys(spotifyPlaylists).map((key) => (
             <button
               key={key}
@@ -36,7 +36,7 @@ export default function SpotifyPlayer() {
 
       {/* Spotify iFrame 埋め込みエリア */}
       {/* スマホ(lg未満)では flex-1 で残り領域いっぱい、PC(lg以上)では h-[152px] に固定 */}
-      <div className="bg-slate-50 p-1.5 rounded-xl border border-gray-200 flex-1 flex flex-col overflow-hidden h-full">
+      <div className="bg-slate-50 p-1.5 rounded-xl border border-gray-200 flex-1 flex flex-col overflow-hidden h-full justify-center lg:p-4">
         <iframe
           src={`https://open.spotify.com/embed/playlist/${spotifyPlaylists[genre]}?utm_source=generator&theme=0`}
           width="100%"
