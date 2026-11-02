@@ -5,10 +5,12 @@ import MemoEditor from "./memo/page"
 import { PomodoroTimer } from "./timer/page"
 import TodoDashboard from "./todo/page"
 import SpotifyPlayer from "./music/page"
+import YoutubePlayer from "./youtube/page"
+import Music from "./music/page"
 
 const Dashboard = () => {
 
-  const [activeTab, setActiveTab] = useState('timer'); // 'timer' | 'todo' | 'memo'
+  const [activeTab, setActiveTab] = useState('timer'); // 'timer' | 'todo' | 'memo' | 'music'
 
   return (
     <div className="h-screen w-screen bg-slate-50 text-slate-800 flex flex-col font-sans overflow-hidden">
@@ -66,7 +68,7 @@ const Dashboard = () => {
               <PomodoroTimer />
             </div>
             <div className="flex-1 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm overflow-y-auto">
-              <SpotifyPlayer />
+              <Music />
             </div>
           </div>
 
@@ -88,7 +90,7 @@ const Dashboard = () => {
           {activeTab === 'timer' && <PomodoroTimer />}
           {activeTab === 'todo' && <TodoDashboard />}
           {activeTab === 'memo' && <MemoEditor />}
-          {activeTab === 'music' && <SpotifyPlayer />}
+          {activeTab === 'music' && <Music/>}
         </div>
       </main>
     </div>

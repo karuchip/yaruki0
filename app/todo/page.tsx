@@ -69,7 +69,7 @@ export default function TodoDashboard() {
 
   return (
     <div id="dashboard-view" className="font-sans h-full flex flex-col">
-      <h2 className="text-base font-bold mb-3 text-[#5c988e]">作業ダッシュボード (ToDo)</h2>
+      <h2 className="text-base font-bold mb-3 text-[#5c988e]">Todo（やりたいこと）</h2>
       {/* 登録フォーム（ToDo内容のみ） */}
       <div className="shrink-0">
         <form onSubmit={addTodo} className="mb-4 flex gap-2">
