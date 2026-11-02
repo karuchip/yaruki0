@@ -1,52 +1,56 @@
-import React, { useState } from 'react';
+import { useState } from "react"
+import SpotifyPlayer from "../components/spotifyPlayer/page"
+import YoutubePlayer from "../components/youtubePlayer/page"
 
-// 各ジャンルごとのSpotifyプレイリストID（例）
-const spotifyPlaylists = {
-  piano: '37i9dQZF1DX4sWSpwq3LiO',     // 実際のSpotifyのプレイリストIDに置き換え
-  acoustic: '37i9dQZF1DXc8kgYqQLMfH',
-  classical: '37i9dQZF1DWWEJlAGA9gs0',
-  jazz: '37i9dQZF1DXbITWG1ZJKYt',
-  hawaiian: 'YOUR_HAWAIIAN_PLAYLIST_ID', // ハワイアンのプレイリストID
-};
+type MusicGenreType = "spotify" | "youtube";
 
-export default function SpotifyPlayer() {
-  const [genre, setGenre] = useState<keyof typeof spotifyPlaylists>('piano');
+const Music = () => {
+
+  const [musicGenre, setMusicGenre] = useState<MusicGenreType>("youtube");
+
+
 
   return (
     <div className="font-sans flex flex-col h-full">
-      {/* ヘルパー部分（ヘッダーとジャンルボタン） */}
-      <div className="flex justify-between items-center mb-2 shrink-0">
-        <span className="font-bold text-[#5c988e] text-sm">BGM</span>
+      {/* タブ切り替えボタンのエリア */}
+      <div className="flex justify-between items-center mb-3 shrink-0">
+        <span className="font-bold text-[#5c988e] text-sm">BGM Player</span>
 
-        {/* ジャンル選択ボタン */}
-        <div className="flex gap-1 overflow-x-auto text-xs">
-          {Object.keys(spotifyPlaylists).map((key) => (
-            <button
-              key={key}
-              onClick={() => setGenre(key as keyof typeof spotifyPlaylists)}
-              className={`px-2 py-0.5 rounded-md capitalize transition-colors cursor-pointer ${
-                genre === key ? 'bg-[#5c988e] text-white font-bold' : 'bg-slate-100 text-gray-600 hover:bg-slate-200'
-              }`}
-            >
-              {key}
-            </button>
-          ))}
+        {/* ピル型タブボタン */}
+        <div className="flex bg-slate-100 p-1 rounded-xl border border-gray-200 gap-1">
+          <button
+            type="button"
+            onClick={() => setMusicGenre("spotify")}
+            className={`px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              musicGenre === "spotify"
+                ? "bg-[#5c988e] text-white shadow-sm"
+                : "text-gray-500 hover:text-slate-800 hover:bg-slate-200/60"
+            }`}
+          >
+            Spotify
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMusicGenre("youtube")}
+            className={`px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              musicGenre === "youtube"
+                ? "bg-[#5c988e] text-white shadow-sm"
+                : "text-gray-500 hover:text-slate-800 hover:bg-slate-200/60"
+            }`}
+          >
+            YouTube
+          </button>
         </div>
       </div>
 
-      {/* Spotify iFrame 埋め込みエリア */}
-      {/* スマホ(lg未満)では flex-1 で残り領域いっぱい、PC(lg以上)では h-[152px] に固定 */}
-      <div className="bg-slate-50 p-1.5 rounded-xl border border-gray-200 flex-1 flex flex-col overflow-hidden h-full">
-        <iframe
-          src={`https://open.spotify.com/embed/playlist/${spotifyPlaylists[genre]}?utm_source=generator&theme=0`}
-          width="100%"
-          frameBorder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-          title={`Spotify ${genre} playlist`}
-          className="w-full rounded-lg h-full"
-        />
+      {/* プレイヤー切り替え表示エリア */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {musicGenre === "spotify" && <SpotifyPlayer />}
+        {musicGenre === "youtube" && <YoutubePlayer />}
       </div>
     </div>
   );
 }
+
+export default Music
