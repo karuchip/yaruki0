@@ -2,11 +2,9 @@
 
 import { useState } from "react"
 import MemoEditor from "./memo/page"
-import { PomodoroTimer } from "./timer/page"
 import TodoDashboard from "./todo/page"
-import SpotifyPlayer from "./music/page"
-import YoutubePlayer from "./youtube/page"
 import Music from "./music/page"
+import TimerComponent from "./timer/page"
 
 const Dashboard = () => {
 
@@ -65,7 +63,7 @@ const Dashboard = () => {
           {/* 左カラム：タイマー & Spotifyプレイヤー */}
           <div className="col-span-5 flex flex-col gap-6 h-full overflow-hidden">
             <div className="shrink-0 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
-              <PomodoroTimer />
+              <TimerComponent />
             </div>
             <div className="flex-1 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm overflow-y-auto">
               <Music />
@@ -87,7 +85,7 @@ const Dashboard = () => {
 
         {/* === スマホ・タブレット表示 (lg未満) === */}
         <div className="block lg:hidden h-full overflow-y-auto bg-white rounded-2xl border border-gray-200 p-4 shadow-sm">
-          {activeTab === 'timer' && <PomodoroTimer />}
+          {activeTab === 'timer' && <TimerComponent />}
           {activeTab === 'todo' && <TodoDashboard />}
           {activeTab === 'memo' && <MemoEditor />}
           {activeTab === 'music' && <Music/>}
