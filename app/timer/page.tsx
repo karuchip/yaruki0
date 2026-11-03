@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { PomodoroTimer } from "../components/time/pomodoro/page";
 import Stopwatch from "../components/time/stopwatch/page";
+import CustomTimer from "../components/time/customTimer/page";
 
-type timerGenreType = "stopWatch" | "pomodoro";
+type timerGenreType = "stopWatch" | "timer" | "pomodoro";
 
-const TimerComponent = () => {
+type PropType = {
+  timerGenre: string,
+  setTimerGenre: Dispatch<SetStateAction<timerGenreType>>
+}
 
-  const [timerGenre, setTimerGenre] = useState<timerGenreType>("stopWatch");
+const TimerComponent = ({timerGenre, setTimerGenre}:PropType) => {
 
   // タブを切り替えるときの関数
-  const handleTabChange = (nextGenre: 'stopWatch' | 'pomodoro') => {
+  const handleTabChange = (nextGenre: 'stopWatch'| 'timer' | 'pomodoro') => {
 
     // すでに開いているタブを開いた場合：何もしない
     if(timerGenre === nextGenre) return;
@@ -30,7 +34,7 @@ const TimerComponent = () => {
       <div className="font-sans flex flex-col h-full">
         {/* タブ切り替えボタンのエリア */}
         <div className="flex justify-between items-center mb-3 shrink-0">
-          <span className="font-bold text-[#5c988e] text-sm">BGM Player</span>
+          <span className="font-bold text-[#5c988e] text-sm">Time</span>
 
           {/* ピル型タブボタン */}
           <div className="flex bg-slate-100 p-1 rounded-xl border border-gray-200 gap-1">
@@ -44,6 +48,18 @@ const TimerComponent = () => {
               }`}
             >
               ストップウォッチ
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleTabChange("timer")}
+              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+                timerGenre === "timer"
+                  ? "bg-[#5c988e] text-white shadow-sm"
+                  : "text-gray-500 hover:text-slate-800 hover:bg-slate-200/60"
+              }`}
+            >
+              タイマー
             </button>
 
             <button
@@ -63,6 +79,7 @@ const TimerComponent = () => {
         {/* プレイヤー切り替え表示エリア */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {timerGenre === "stopWatch" && <Stopwatch />}
+          {timerGenre === "timer" && <CustomTimer />}
           {timerGenre === "pomodoro" && <PomodoroTimer />}
         </div>
       </div>

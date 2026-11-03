@@ -6,9 +6,14 @@ import TodoDashboard from "./todo/page"
 import Music from "./music/page"
 import TimerComponent from "./timer/page"
 
+type timerGenreType = "stopWatch" | "timer" | "pomodoro";
+
 const Dashboard = () => {
 
   const [activeTab, setActiveTab] = useState('timer'); // 'timer' | 'todo' | 'memo' | 'music'
+
+  // タイマーコンポーネントタブ用
+  const [timerGenre, setTimerGenre] = useState<timerGenreType>("stopWatch");
 
   return (
     <div className="h-screen w-screen bg-slate-50 text-slate-800 flex flex-col font-sans overflow-hidden">
@@ -63,7 +68,7 @@ const Dashboard = () => {
           {/* 左カラム：タイマー & Spotifyプレイヤー */}
           <div className="col-span-5 flex flex-col gap-6 h-full overflow-hidden">
             <div className="shrink-0 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
-              <TimerComponent />
+              <TimerComponent timerGenre={timerGenre} setTimerGenre={setTimerGenre} />
             </div>
             <div className="flex-1 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm overflow-y-auto">
               <Music />
@@ -85,7 +90,7 @@ const Dashboard = () => {
 
         {/* === スマホ・タブレット表示 (lg未満) === */}
         <div className="block lg:hidden h-full overflow-y-auto bg-white rounded-2xl border border-gray-200 p-4 shadow-sm">
-          {activeTab === 'timer' && <TimerComponent />}
+          {activeTab === 'timer' && <TimerComponent timerGenre={timerGenre} setTimerGenre={setTimerGenre} />}
           {activeTab === 'todo' && <TodoDashboard />}
           {activeTab === 'memo' && <MemoEditor />}
           {activeTab === 'music' && <Music/>}
