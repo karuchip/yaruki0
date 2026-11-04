@@ -5,6 +5,11 @@ import MemoEditor from "./memo/page"
 import TodoDashboard from "./todo/page"
 import Music from "./music/page"
 import TimerComponent from "./timer/page"
+import dynamic from "next/dynamic"
+
+const RealTimeClock = dynamic(() => import('./components/realTimeClock/page'), {
+  ssr: false,
+})
 
 type timerGenreType = "stopWatch" | "timer" | "pomodoro";
 
@@ -19,9 +24,15 @@ const Dashboard = () => {
     <div className="h-screen w-screen bg-slate-50 text-slate-800 flex flex-col font-sans overflow-hidden">
       {/* アプリケーションヘッダー */}
       <header className="h-14 bg-white border-b border-gray-200 px-6 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded-full bg-[#5c988e]" />
-          <h1 className="text-xl font-bold tracking-wide text-[#5c988e]">Yaruki</h1>
+
+        <div className="w-full flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-[#5c988e]" />
+            <h1 className="text-xl font-bold tracking-wide text-[#5c988e]">Yaruki0</h1>
+          </div>
+          <div className="hidden lg:block">
+            <RealTimeClock/>
+          </div>
         </div>
 
         {/* モバイル・タブレット用 タブ切替ボタン (lg以上では非表示) */}
