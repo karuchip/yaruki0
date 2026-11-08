@@ -74,28 +74,37 @@ const CustomTimer = () => {
   return (
     <div className="font-sans flex flex-col items-center p-4">
       {!isRunning && !isPaused && (
-        <div>
+        <div className="flex items-center gap-2 mb-3">
           <input
             type="number"
+            min={1}
+            max={120}
             value={inputMinutes}
             onChange={(e) => setInputMinutes(Number(e.target.value))}
-            className="border p-1 rounded mb-2"
+            className="w-20 text-center bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-[#5c988e] font-mono text-lg font-bold text-slate-800"
           />
-          <span> 分</span>
+          <span className="text-xs text-gray-500 font-medium">分</span>
         </div>
       )}
 
       {(isRunning || isPaused) && (
-        <p className="text-2xl font-bold mb-2">{formatTime(seconds)}</p>
+        <p className="text-3xl font-mono font-bold text-slate-800 tracking-wider mb-4">{formatTime(seconds)}</p>
       )}
 
       <div className="flex gap-2">
-        <button onClick={handleTimeChange} className="px-3 py-1 bg-[#5c988e] text-white rounded">
+        <button
+          onClick={handleTimeChange}
+          className="px-4 py-2 bg-[#5c988e] hover:opacity-95 text-white text-xs font-medium rounded-lg transition-all cursor-pointer shadow-sm"
+        >
           {isRunning ? "一時停止" : isPaused ? "再開" : "開始"}
         </button>
 
         {(isRunning || isPaused) && (
-          <button onClick={handleReset} className="px-3 py-1 bg-gray-200 rounded">
+          <button
+            type="button"
+            onClick={handleReset}
+            className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-600 text-xs font-medium rounded-lg transition-colors cursor-pointer"
+          >
             リセット
           </button>
         )}
