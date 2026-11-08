@@ -16,7 +16,7 @@ const RealTimeClock = () => {
   return(
     <>
       <div>
-        <p>{time.toLocaleTimeString()}</p>
+        <p className="text-[#5c988e] text-[18px]">{time.toLocaleTimeString()}</p>
       </div>
     </>
   )
