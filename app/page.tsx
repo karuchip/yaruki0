@@ -6,6 +6,7 @@ import TodoDashboard from "./todo/page"
 import Music from "./music/page"
 import TimerComponent from "./timer/page"
 import dynamic from "next/dynamic"
+import Menu from "./components/common/menu/page"
 
 const RealTimeClock = dynamic(() => import('./components/realTimeClock/page'), {
   ssr: false,
@@ -36,41 +37,50 @@ const Dashboard = () => {
         </div>
 
         {/* モバイル・タブレット用 タブ切替ボタン (lg以上では非表示) */}
-        <nav className="flex lg:hidden bg-slate-100 p-1 rounded-xl text-xs font-medium">
-          <button
-            onClick={() => setActiveTab('timer')}
-            className={`px-3 py-1.5 rounded-lg transition-all ${
-              activeTab === 'timer' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
-            }`}
-          >
-            Timer
-          </button>
-          <button
-            onClick={() => setActiveTab('todo')}
-            className={`px-3 py-1.5 rounded-lg transition-all ${
-              activeTab === 'todo' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
-            }`}
-          >
-            ToDo
-          </button>
-          <button
-            onClick={() => setActiveTab('memo')}
-            className={`px-3 py-1.5 rounded-lg transition-all ${
-              activeTab === 'memo' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
-            }`}
-          >
-            Memo
-          </button>
-          <button
-            onClick={() => setActiveTab('music')}
-            className={`px-3 py-1.5 rounded-lg transition-all ${
-              activeTab === 'music' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
-            }`}
-          >
-            Music
-          </button>
-        </nav>
+        <div className="flex">
+          <nav className="flex lg:hidden bg-slate-100 p-1 rounded-xl text-xs font-medium">
+            <button
+              onClick={() => setActiveTab('timer')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${
+                activeTab === 'timer' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
+              }`}
+            >
+              Timer
+            </button>
+            <button
+              onClick={() => setActiveTab('todo')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${
+                activeTab === 'todo' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
+              }`}
+            >
+              ToDo
+            </button>
+            <button
+              onClick={() => setActiveTab('memo')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${
+                activeTab === 'memo' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
+              }`}
+            >
+              Memo
+            </button>
+            <button
+              onClick={() => setActiveTab('music')}
+              className={`px-3 py-1.5 rounded-lg transition-all ${
+                activeTab === 'music' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
+              }`}
+            >
+              Music
+            </button>
+          </nav>
+
+          {/* メニュー */}
+          <div className="ml-4">
+            <Menu/>
+          </div>
+        </div>
+
       </header>
+
 
       {/* メインコンテンツエリア */}
       <main className="flex-1 p-4 lg:p-6 overflow-hidden">
