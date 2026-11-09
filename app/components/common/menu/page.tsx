@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Box, Divider } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -8,10 +8,28 @@ import CropOriginalIcon from '@mui/icons-material/CropOriginal';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import LockIcon from '@mui/icons-material/Lock';
 import HomeIcon from '@mui/icons-material/Home';
+import dayjs from "dayjs";
+import 'dayjs/locale/ja';
+dayjs.locale('ja');
 
 const Menu = () => {
   // Drawerの開閉状態だけ残す
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  // 今日の日付を取得
+  const today = dayjs().format('YYYY年M月D日（dd）');
+
+  // 時間を取得
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timerId);
+  }, []);
+
+
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -93,6 +111,14 @@ const Menu = () => {
             })}
           </List>
         </Box>
+        <div className="h-full flex justify-center items-end pb-8">
+          <div className="text-[18px] text-[#5c988e]">
+            <p className="flex justify-center text-[18px]">{today}</p>
+            <p className="flex justify-center text-[24px]">
+              {dayjs(time).format('HH:mm')}
+            </p>
+          </div>
+        </div>
       </Drawer>
     </>
   );
