@@ -34,14 +34,14 @@ const TimerComponent = ({timerGenre, setTimerGenre}:PropType) => {
       <div className="font-sans flex flex-col h-full">
         {/* タブ切り替えボタンのエリア */}
         <div className="flex justify-between items-center mb-3 shrink-0">
-          <span className="font-bold text-[#5c988e] text-sm">Time</span>
+          <span className="font-bold text-[#5c988e] text-sm text-[16px]">Time</span>
 
           {/* ピル型タブボタン */}
           <div className="flex bg-slate-100 p-1 rounded-xl border border-gray-200 gap-1">
             <button
               type="button"
               onClick={() => handleTabChange("stopWatch")}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              className={`w-18 lg:w-auto px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                 timerGenre === "stopWatch"
                   ? "bg-[#5c988e] text-white shadow-sm"
                   : "text-gray-500 hover:text-slate-800 hover:bg-slate-200/60"
@@ -53,7 +53,7 @@ const TimerComponent = ({timerGenre, setTimerGenre}:PropType) => {
             <button
               type="button"
               onClick={() => handleTabChange("timer")}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              className={`w-18 lg:w-auto px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                 timerGenre === "timer"
                   ? "bg-[#5c988e] text-white shadow-sm"
                   : "text-gray-500 hover:text-slate-800 hover:bg-slate-200/60"
@@ -65,7 +65,7 @@ const TimerComponent = ({timerGenre, setTimerGenre}:PropType) => {
             <button
               type="button"
               onClick={() => handleTabChange("pomodoro")}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              className={`w-18 lg:w-auto px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                 timerGenre === "pomodoro"
                   ? "bg-[#5c988e] text-white shadow-sm"
                   : "text-gray-500 hover:text-slate-800 hover:bg-slate-200/60"

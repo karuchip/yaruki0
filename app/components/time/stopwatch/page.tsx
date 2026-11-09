@@ -63,7 +63,7 @@ const Stopwatch = () => {
       </div>
 
       {/* 時間表示エリア */}
-      <div className="flex-1 flex items-center justify-center bg-slate-50 rounded-xl border border-gray-100 my-2">
+      <div className="flex-1 flex items-center justify-center bg-slate-50 rounded-xl border border-gray-100 mb-2">
         <div className="lg:text-3xl text-5xl font-mono font-bold text-slate-800 tracking-wider">
           {formatTime(time)}
         </div>

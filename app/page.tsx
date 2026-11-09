@@ -29,7 +29,7 @@ const Dashboard = () => {
         <div className="w-full flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded-full bg-[#5c988e]" />
-            <h1 className="text-xl font-bold tracking-wide text-[#5c988e]">Yaruki0</h1>
+            <h1 className="text-xl font-bold tracking-wide text-[#5c988e] hidden md:block">Yaruki0</h1>
           </div>
           <div className="hidden lg:block">
             <RealTimeClock/>

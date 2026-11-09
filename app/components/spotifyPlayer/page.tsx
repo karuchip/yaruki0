@@ -6,7 +6,7 @@ const spotifyPlaylists = {
   acoustic: '37i9dQZF1DXc8kgYqQLMfH',
   classical: '37i9dQZF1DWWEJlAGA9gs0',
   jazz: '37i9dQZF1DXbITWG1ZJKYt',
-  hawaiian: 'YOUR_HAWAIIAN_PLAYLIST_ID', // ハワイアンのプレイリストID
+  hawaiian: '37i9dQZF1DWY0N3eAirRjZ', // ハワイアンのプレイリストID
 };
 
 export default function SpotifyPlayer() {
@@ -36,15 +36,15 @@ export default function SpotifyPlayer() {
 
       {/* Spotify iFrame 埋め込みエリア */}
       {/* スマホ(lg未満)では flex-1 で残り領域いっぱい、PC(lg以上)では h-[152px] に固定 */}
-      <div className="bg-slate-50 p-1.5 rounded-xl border border-gray-200 flex-1 flex flex-col overflow-hidden h-full justify-center lg:p-4">
+      <div className="bg-slate-50 rounded-xl border border-gray-200 flex-1 flex overflow-hidden justify-center">
         <iframe
-          src={`https://open.spotify.com/embed/playlist/${spotifyPlaylists[genre]}?utm_source=generator&theme=0`}
+          src={`https://open.spotify.com/embed/playlist/${spotifyPlaylists[genre]}?utm_source=generator&si=3bc09c60ceb14ada`}
           width="100%"
           frameBorder="0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
           title={`Spotify ${genre} playlist`}
-          className="w-full rounded-lg h-full"
+          className="w-full rounded-lg lg:h-[700px]"
         />
       </div>
     </div>

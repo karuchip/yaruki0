@@ -72,38 +72,52 @@ const CustomTimer = () => {
   };
 
   return (
-    <div className="font-sans flex flex-col items-center p-4">
-      {!isRunning && !isPaused && (
-        <div className="flex items-center gap-2 mb-3">
-          <input
-            type="number"
-            min={1}
-            max={120}
-            value={inputMinutes}
-            onChange={(e) => setInputMinutes(Number(e.target.value))}
-            className="w-20 text-center bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-[#5c988e] font-mono text-lg font-bold text-slate-800"
-          />
-          <span className="text-xs text-gray-500 font-medium">分</span>
-        </div>
-      )}
+    <div className="font-sans flex flex-col h-full bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+      {/* タイトル */}
+      <div className="flex justify-between items-center mb-3 shrink-0">
+        <span className="font-bold text-[#5c988e] text-sm">タイマー</span>
+      </div>
 
-      {(isRunning || isPaused) && (
-        <p className="text-3xl font-mono font-bold text-slate-800 tracking-wider mb-4">{formatTime(seconds)}</p>
-      )}
+      {/* 時間表示・入力エリア */}
+      <div className="flex-1 flex items-center justify-center bg-slate-50 rounded-xl border border-gray-100 mb-2 py-4">
+        {!isRunning && !isPaused ? (
+          <div className="flex items-center gap-2">
+            <input
+              type="number"
+              min={1}
+              max={120}
+              value={inputMinutes}
+              onChange={(e) => setInputMinutes(Number(e.target.value))}
+              className="w-20 text-center bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-[#5c988e] font-mono text-3xl font-bold text-slate-800"
+            />
+            <span className="text-sm text-gray-500 font-medium">分</span>
+          </div>
+        ) : (
+          <div className="lg:text-3xl text-5xl font-mono font-bold text-slate-800 tracking-wider">
+            {formatTime(seconds)}
+          </div>
+        )}
+      </div>
 
-      <div className="flex gap-2">
+      {/* 操作ボタンエリア */}
+      <div className="flex gap-2 shrink-0 mt-2">
         <button
+          type="button"
           onClick={handleTimeChange}
-          className="px-4 py-2 bg-[#5c988e] hover:opacity-95 text-white text-xs font-medium rounded-lg transition-all cursor-pointer shadow-sm"
+          className={`flex-1 py-2 rounded-lg text-xs font-medium text-white transition-opacity cursor-pointer ${
+            isRunning
+              ? 'bg-amber-500 hover:bg-amber-600'
+              : 'bg-[#5c988e] hover:opacity-95'
+          }`}
         >
-          {isRunning ? "一時停止" : isPaused ? "再開" : "開始"}
+          {isRunning ? '一時停止' : isPaused ? '再開' : 'スタート'}
         </button>
 
         {(isRunning || isPaused) && (
           <button
             type="button"
             onClick={handleReset}
-            className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-600 text-xs font-medium rounded-lg transition-colors cursor-pointer"
+            className="px-4 py-2 bg-slate-200 text-slate-600 text-xs font-medium rounded-lg hover:bg-slate-300 transition-colors cursor-pointer"
           >
             リセット
           </button>
