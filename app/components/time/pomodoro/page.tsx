@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { usePomodoroStorage } from '@/hooks/useLocalStorageTimer';
 import { usePomodoroTimerState } from '@/hooks/useLocalStorageTimer';
+import { useTranslation } from 'react-i18next';
 
 export function PomodoroTimer() {
   const { addLog } = usePomodoroStorage();
@@ -27,6 +28,9 @@ export function PomodoroTimer() {
     timeLeft,
     isRunning,
   } = timerState;
+
+  // 辞書ライブラリ
+    const {t} = useTranslation();
 
   /* --- カウントダウン & 自動記録 --- */
   useEffect(() => {
@@ -115,7 +119,7 @@ export function PomodoroTimer() {
         >
           <div className="flex items-center gap-2">
             {mode === 'focus' && <span className="w-1.5 h-1.5 rounded-full bg-[#5c988e]" />}
-            <span>Focus Time</span>
+            <span>{t('pomodoro.focus')}</span>
           </div>
           <div className="flex items-center gap-1">
             <input
@@ -127,7 +131,7 @@ export function PomodoroTimer() {
               disabled={isRunning}
               className="w-10 text-right bg-transparent border-b border-gray-300 focus:outline-none focus:border-[#5c988e]"
             />
-            <span className="text-[10px] font-normal text-gray-500">min</span>
+            <span className="text-[10px] font-normal text-gray-500">{t('pomodoro.minuteUnit')}</span>
           </div>
         </div>
 
@@ -139,7 +143,7 @@ export function PomodoroTimer() {
         >
           <div className="flex items-center gap-2">
             {mode === 'break' && <span className="w-1.5 h-1.5 rounded-full bg-[#5c988e]" />}
-            <span>Break Time</span>
+            <span>{t('pomodoro.break')}</span>
           </div>
           <div className="flex items-center gap-1">
             <input
@@ -151,13 +155,13 @@ export function PomodoroTimer() {
               disabled={isRunning}
               className="w-10 text-right bg-transparent border-b border-gray-300 focus:outline-none focus:border-[#5c988e]"
             />
-            <span className="text-[10px] font-normal text-gray-500">min</span>
+            <span className="text-[10px] font-normal text-gray-500">{t('pomodoro.minuteUnit')}</span>
           </div>
         </div>
 
         {/* Rounds */}
         <div className="flex items-center justify-between p-2 text-gray-700 bg-slate-50 rounded-xl text-xs">
-          <span>Rounds</span>
+          <span>{t('pomodoro.rounds')}</span>
           <div className="flex items-center gap-1">
             <span className="text-gray-400">({currentRound} /</span>
             <input
@@ -192,7 +196,7 @@ export function PomodoroTimer() {
               : 'bg-[#5c988e] hover:opacity-95'    // 停止中ならスタート用にブランドカラー
           }`}
         >
-          {isRunning ? '一時停止' : 'スタート'}
+          {isRunning ? t('timeButtons.stop') : t('timeButtons.start')}
         </button>
 
         <button
@@ -200,7 +204,7 @@ export function PomodoroTimer() {
           onClick={resetTimer}
           className="px-4 py-2 bg-slate-200 text-slate-600 text-xs font-medium rounded-lg hover:bg-slate-300 transition-colors cursor-pointer"
         >
-          リセット
+          {t('timeButtons.reset')}
         </button>
       </div>
     </div>

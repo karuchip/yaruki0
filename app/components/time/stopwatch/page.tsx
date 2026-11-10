@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Stopwatch = () => {
 
   const [time, setTime] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
+
+  // 辞書ライブラリ
+    const {t} = useTranslation();
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -59,7 +63,7 @@ const Stopwatch = () => {
     <div className="font-sans flex flex-col h-full bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
       {/* タイトル */}
       <div className="flex justify-between items-center mb-3 shrink-0">
-        <span className="font-bold text-[#5c988e] text-sm">ストップウォッチ</span>
+        <span className="font-bold text-[#5c988e] text-sm">{t('time.stopWatch')}</span>
       </div>
 
       {/* 時間表示エリア */}
@@ -81,7 +85,7 @@ const Stopwatch = () => {
               : 'bg-[#5c988e] hover:opacity-95'    // 停止中・一時停止中ならスタート用にブランドカラー
           }`}
         >
-          {isRunning ? '一時停止' : isPaused ? '再開' : 'スタート'}
+          {isRunning ? t('timeButtons.stop') : isPaused ? t('timeButtons.resume') : t('timeButtons.start')}
         </button>
 
         {/* リセットボタン（動いている時や一時停止中に出す） */}
@@ -91,7 +95,7 @@ const Stopwatch = () => {
             onClick={handleReset}
             className="px-4 py-2 bg-slate-200 text-slate-600 text-xs font-medium rounded-lg hover:bg-slate-300 transition-colors cursor-pointer"
           >
-            リセット
+            {t('timeButtons.reset')}
           </button>
         )}
       </div>

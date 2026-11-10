@@ -1,6 +1,7 @@
 import { useState } from "react"
 import SpotifyPlayer from "../components/spotifyPlayer/page"
 import YoutubePlayer from "../components/youtubePlayer/page"
+import { useTranslation } from "react-i18next";
 
 type MusicGenreType = "spotify" | "youtube";
 
@@ -8,13 +9,15 @@ const Music = () => {
 
   const [musicGenre, setMusicGenre] = useState<MusicGenreType>("youtube");
 
+    // 辞書ライブラリ
+    const {t} = useTranslation();
 
 
   return (
     <div className="font-sans flex flex-col h-full">
       {/* タブ切り替えボタンのエリア */}
       <div className="flex justify-between items-center mb-3 shrink-0">
-        <span className="font-bold text-[#5c988e] text-[16px]">BGM Player</span>
+        <span className="font-bold text-[#5c988e] text-[16px]">{t('BGM.title')}</span>
 
         {/* ピル型タブボタン */}
         <div className="flex bg-slate-100 p-1 rounded-xl border border-gray-200 gap-1">

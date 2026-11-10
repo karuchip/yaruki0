@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function YoutubePlayer() {
+
+  // 辞書ライブラリ
+    const {t} = useTranslation();
+
   // 初期値にお気に入りの作業用BGMなどのYouTube IDを設定しておくと便利！
   const [inputUrl, setInputUrl] = useState('');
   const [videoId, setVideoId] = useState('jfKfPfyJRdk'); // デフォルト動画ID (例: Lofi Girl)
@@ -35,7 +40,7 @@ export default function YoutubePlayer() {
       <form onSubmit={handleSetVideo} className="flex gap-2 mb-3 shrink-0">
         <input
           type="text"
-          placeholder="YouTube URL または 動画IDを入力..."
+          placeholder={t('BGM.description')}
           value={inputUrl}
           onChange={(e) => setInputUrl(e.target.value)}
           className="flex-grow p-1.5 border border-gray-200 rounded-lg text-xs focus:outline-none focus:border-[#5c988e] bg-slate-50"
@@ -44,7 +49,7 @@ export default function YoutubePlayer() {
           type="submit"
           className="px-3 py-1.5 bg-[#5c988e] text-white text-xs font-medium rounded-lg hover:opacity-90 transition-opacity cursor-pointer shrink-0"
         >
-          読み込み
+          {t('BGM.load')}
         </button>
       </form>
 

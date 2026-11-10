@@ -4,8 +4,13 @@ import React, { useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { useLocalStorageMemo } from '@/hooks/useLocalStorageMemo';
+import { useTranslation } from 'react-i18next';
 
 export default function MemoEditor() {
+
+  // 辞書ライブラリ
+  const {t} = useTranslation();
+
   const [htmlContent, setHtmlContent, isLoaded] = useLocalStorageMemo();
 
   const editor = useEditor({
@@ -37,7 +42,7 @@ export default function MemoEditor() {
     <div className="font-sans flex flex-col h-full">
       {/* メニューバー */}
       <div className="flex gap-3 mb-3 text-sm items-center justify-between border-b border-gray-100 pb-2 shrink-0">
-        <span className="font-bold text-[#5c988e] text-base">Memo</span>
+        <span className="font-bold text-[#5c988e] text-base">{t('memo.title')}</span>
 
         <div className="flex gap-3">
           <button
@@ -47,7 +52,7 @@ export default function MemoEditor() {
               editor.isActive('bold') ? 'bg-[#5c988e]/10 text-[#5c988e] font-bold' : 'text-gray-400 hover:text-gray-600'
             }`}
           >
-            Bold
+            {t('memo.bold')}
           </button>
 
           <button
@@ -57,7 +62,7 @@ export default function MemoEditor() {
               editor.isActive('bulletList') ? 'bg-[#5c988e]/10 text-[#5c988e] font-bold' : 'text-gray-400 hover:text-gray-600'
             }`}
           >
-            • List
+            {t('memo.list')}
           </button>
         </div>
       </div>
@@ -75,7 +80,7 @@ export default function MemoEditor() {
 
       {/* 補足メッセージ */}
       <p className="text-[11px] text-gray-400 mt-2 shrink-0">
-        ※ 箇条書き中に Tab で右インデント、Shift + Tab で左インデントができます。
+        {t('memo.description')}
       </p>
     </div>
   );

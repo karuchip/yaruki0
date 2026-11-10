@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const CustomTimer = () => {
 
@@ -7,6 +8,8 @@ const CustomTimer = () => {
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
 
+  // 辞書ライブラリ
+    const {t} = useTranslation();
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | undefined;
@@ -75,7 +78,7 @@ const CustomTimer = () => {
     <div className="font-sans flex flex-col h-full bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
       {/* タイトル */}
       <div className="flex justify-between items-center mb-3 shrink-0">
-        <span className="font-bold text-[#5c988e] text-sm">タイマー</span>
+        <span className="font-bold text-[#5c988e] text-sm">{t('time.timer')}</span>
       </div>
 
       {/* 時間表示・入力エリア */}
@@ -110,7 +113,7 @@ const CustomTimer = () => {
               : 'bg-[#5c988e] hover:opacity-95'
           }`}
         >
-          {isRunning ? '一時停止' : isPaused ? '再開' : 'スタート'}
+          {isRunning ? t('timeButtons.stop') : isPaused ? t('timeButtons.resume') : t('timeButtons.start')}
         </button>
 
         {(isRunning || isPaused) && (
@@ -119,7 +122,7 @@ const CustomTimer = () => {
             onClick={handleReset}
             className="px-4 py-2 bg-slate-200 text-slate-600 text-xs font-medium rounded-lg hover:bg-slate-300 transition-colors cursor-pointer"
           >
-            リセット
+            {t('timeButtons.reset')}
           </button>
         )}
       </div>
