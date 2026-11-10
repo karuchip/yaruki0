@@ -1,0 +1,48 @@
+{
+  "common": {
+    "title": "Yaruki0"
+  },
+  "time": {
+    "title": "Time",
+    "stopWatch": "Stopwatch",
+    "timer": "Timer",
+    "pomodoro": "Pomodoro"
+  },
+  "pomodoro": {
+    "focus": "Focus Time",
+    "break": "Break Time",
+    "rounds": "Rounds",
+    "minuteUnit": "min"
+  },
+  "timeButtons": {
+    "start": "Start",
+    "stop": "Pause",
+    "reset": "Reset",
+    "resume": "Resume"
+  },
+  "BGM": {
+    "title": "BGM Player",
+    "description": "Enter YouTube URL or Video ID...",
+    "load": "Load"
+  },
+  "todo": {
+    "title": "To-Do List",
+    "description": "Enter a new To-Do",
+    "add": "Add",
+    "totalTime": "Total Work Time",
+    "hourUnit": "h",
+    "minuteUnit": "m",
+    "delete": "Delete"
+  },
+  "memo": {
+    "title": "Memo",
+    "bold": "Bold",
+    "list": "・ List",
+    "description": "* Press Tab to indent and Shift + Tab to unindent while in a list."
+  },
+  "date": {
+    "yearUnit": "/",
+    "monthUnit": "/",
+    "dayUnit": ""
+  }
+}

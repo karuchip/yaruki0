@@ -7,6 +7,9 @@ import Music from "./music/page"
 import TimerComponent from "./timer/page"
 import dynamic from "next/dynamic"
 import Menu from "./components/common/menu/page"
+import { useTranslation } from "react-i18next"
+// 辞書ライブラリー
+import '@/src/i18n';
 
 const RealTimeClock = dynamic(() => import('./components/realTimeClock/page'), {
   ssr: false,
@@ -15,6 +18,9 @@ const RealTimeClock = dynamic(() => import('./components/realTimeClock/page'), {
 type timerGenreType = "stopWatch" | "timer" | "pomodoro";
 
 const Dashboard = () => {
+
+  // 辞書ライブラリ
+  const {t} = useTranslation();
 
   const [activeTab, setActiveTab] = useState('timer'); // 'timer' | 'todo' | 'memo' | 'music'
 
@@ -45,7 +51,7 @@ const Dashboard = () => {
                 activeTab === 'timer' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
               }`}
             >
-              Timer
+              {t('time.title')}
             </button>
             <button
               onClick={() => setActiveTab('todo')}
@@ -53,7 +59,7 @@ const Dashboard = () => {
                 activeTab === 'todo' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
               }`}
             >
-              ToDo
+              {t('todo.title')}
             </button>
             <button
               onClick={() => setActiveTab('memo')}
@@ -61,7 +67,7 @@ const Dashboard = () => {
                 activeTab === 'memo' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
               }`}
             >
-              Memo
+              {t('memo.title')}
             </button>
             <button
               onClick={() => setActiveTab('music')}
@@ -69,7 +75,7 @@ const Dashboard = () => {
                 activeTab === 'music' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
               }`}
             >
-              Music
+              {t('BGM.title')}
             </button>
           </nav>
 

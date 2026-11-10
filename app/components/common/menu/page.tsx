@@ -10,14 +10,15 @@ import LockIcon from '@mui/icons-material/Lock';
 import HomeIcon from '@mui/icons-material/Home';
 import dayjs from "dayjs";
 import 'dayjs/locale/ja';
+import ChangeLanguage from "../language/page";
+import ShowDate from "../date/page";
+import CurrentTime from "../cuurentTime";
 dayjs.locale('ja');
 
 const Menu = () => {
   // Drawerの開閉状態だけ残す
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  // 今日の日付を取得
-  const today = dayjs().format('YYYY年M月D日（dd）');
 
   // 時間を取得
   const [time, setTime] = useState(new Date());
@@ -111,14 +112,28 @@ const Menu = () => {
             })}
           </List>
         </Box>
+
+
         <div className="h-full flex justify-center items-end pb-8">
           <div className="text-[18px] text-[#5c988e]">
-            <p className="flex justify-center text-[18px]">{today}</p>
-            <p className="flex justify-center text-[24px]">
-              {dayjs(time).format('HH:mm')}
-            </p>
+
+            {/* 言語切り替え */}
+            <div className="flex justify-center mb-8">
+              <ChangeLanguage/>
+            </div>
+
+            {/* 日付 */}
+            <div className="flex justify-center text-[18px]">
+              <ShowDate/>
+            </div>
+
+            {/* 現在時刻 */}
+            <div className="flex justify-center text-[24px]">
+              <CurrentTime/>
+            </div>
           </div>
         </div>
+
       </Drawer>
     </>
   );

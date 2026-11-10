@@ -1,0 +1,48 @@
+{
+  "common": {
+    "title": "Yaruki0"
+  },
+  "time": {
+    "title": "Time",
+    "stopWatch": "ストップウォッチ",
+    "timer": "タイマー",
+    "pomodoro": "ポモドーロ"
+  },
+  "pomodoro": {
+    "focus": "集中タイム",
+    "break": "休憩タイム",
+    "rounds": "ラウンド",
+    "minuteUnit": "分"
+  },
+  "timeButtons": {
+    "start": "スタート",
+    "stop": "一時停止",
+    "reset": "リセット",
+    "resume": "再開"
+  },
+  "BGM": {
+    "title": "BGM Player",
+    "description": "Youtube URL または 動画IDを入力...",
+    "load": "読み込み"
+  },
+  "todo": {
+    "title": "Todo",
+    "description": "新しいToDoを入力",
+    "add": "追加",
+    "totalTime": "合計作業時間",
+    "hourUnit": "時間",
+    "minuteUnit": "分",
+    "delete": "削除"
+  },
+  "memo": {
+    "title": "Memo",
+    "bold": "太字",
+    "list": "・ リスト",
+    "description": "※箇条書き中に Tab で右インデント、Shift + Tabで左インデントができます"
+  },
+  "date": {
+    "yearUnit": "年",
+    "monthUnit": "月",
+    "dayUnit": "日"
+  }
+}
