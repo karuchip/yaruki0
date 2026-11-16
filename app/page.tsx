@@ -10,6 +10,7 @@ import Menu from "./components/common/menu/page"
 import { useTranslation } from "react-i18next"
 // 辞書ライブラリー
 import '@/src/i18n';
+import { useDashboardData } from "@/hooks/useDashboardData"
 
 const RealTimeClock = dynamic(() => import('./components/realTimeClock/page'), {
   ssr: false,
@@ -26,6 +27,9 @@ const Dashboard = () => {
 
   // タイマーコンポーネントタブ用
   const [timerGenre, setTimerGenre] = useState<timerGenreType>("stopWatch");
+
+  // localStorage保存データ取得（24時間経過後削除）
+  const { memo, setMemo, todos, setTodos, isLoaded, expiresAt } = useDashboardData();
 
   return (
     <div className="h-screen w-screen bg-slate-50 text-slate-800 flex flex-col font-sans overflow-hidden">
@@ -81,7 +85,7 @@ const Dashboard = () => {
 
           {/* メニュー */}
           <div className="ml-4">
-            <Menu/>
+            <Menu expiresAt={expiresAt}/>
           </div>
         </div>
 
@@ -106,11 +110,11 @@ const Dashboard = () => {
           <div className="col-span-7 flex flex-col gap-6 h-full overflow-hidden">
             {/* Todo */}
             <div className="flex-1 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm flex flex-col overflow-hidden">
-              <TodoDashboard />
+              <TodoDashboard todos={todos} setTodos={setTodos} isLoaded={isLoaded}/>
             </div>
             {/* メモエディタ */}
             <div className="flex-1 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
-              <MemoEditor />
+              <MemoEditor memo={memo} setMemo={setMemo} isLoaded={isLoaded}/>
             </div>
           </div>
         </div>
@@ -118,8 +122,8 @@ const Dashboard = () => {
         {/* === スマホ・タブレット表示 (lg未満) === */}
         <div className="block lg:hidden h-full overflow-y-auto bg-white rounded-2xl border border-gray-200 p-4 shadow-sm">
           {activeTab === 'timer' && <TimerComponent timerGenre={timerGenre} setTimerGenre={setTimerGenre} />}
-          {activeTab === 'todo' && <TodoDashboard />}
-          {activeTab === 'memo' && <MemoEditor />}
+          {activeTab === 'todo' && <TodoDashboard todos={todos} setTodos={setTodos} isLoaded={isLoaded}/>}
+          {activeTab === 'memo' && <MemoEditor memo={memo} setMemo={setMemo} isLoaded={isLoaded}/>}
           {activeTab === 'music' && <Music/>}
         </div>
       </main>

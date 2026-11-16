@@ -13,9 +13,15 @@ import 'dayjs/locale/ja';
 import ChangeLanguage from "../language/page";
 import ShowDate from "../date/page";
 import CurrentTime from "../cuurentTime";
+import { CountdownRemainingTime } from "../CountdownRemainingTime";
 dayjs.locale('ja');
 
-const Menu = () => {
+type MenuProps = {
+  expiresAt: number
+}
+
+const Menu = ({expiresAt}:MenuProps) => {
+
   // Drawerの開閉状態だけ残す
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -29,6 +35,10 @@ const Menu = () => {
     }, 1000);
     return () => clearInterval(timerId);
   }, []);
+
+
+  // 残り時間を計算
+
 
 
 
@@ -112,6 +122,10 @@ const Menu = () => {
             })}
           </List>
         </Box>
+
+        <div>
+          <CountdownRemainingTime expiresAt={expiresAt}/>
+        </div>
 
 
         <div className="h-full flex justify-center items-end pb-8">

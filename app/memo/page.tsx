@@ -3,15 +3,19 @@
 import React, { useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { useLocalStorageMemo } from '@/hooks/useLocalStorageMemo';
 import { useTranslation } from 'react-i18next';
 
-export default function MemoEditor() {
+type MemoProps = {
+  memo: string;
+  setMemo: React.Dispatch<React.SetStateAction<string>>;
+  isLoaded: boolean;
+}
+
+export default function MemoEditor({memo, setMemo, isLoaded}:MemoProps) {
 
   // 辞書ライブラリ
   const {t} = useTranslation();
 
-  const [htmlContent, setHtmlContent, isLoaded] = useLocalStorageMemo();
 
   const editor = useEditor({
     extensions: [
@@ -19,19 +23,19 @@ export default function MemoEditor() {
     ],
     // ユーザーが入力を進めるたびに、最新のHTMLをStateに格納（自動保存へ連動）
     onUpdate: ({ editor }) => {
-      setHtmlContent(editor.getHTML());
+      setMemo(editor.getHTML());
     },
   });
 
   // ローカルストレージからの読み込みが完了したら、エディタに初期値をセットする
   useEffect(() => {
-    if (isLoaded && editor && htmlContent) {
+    if (isLoaded && editor && memo) {
       // 現在のエディタの中身とストレージの中身が違う場合のみセット（無限ループ防止）
-      if (editor.getHTML() !== htmlContent) {
-        editor.commands.setContent(htmlContent);
+      if (editor.getHTML() !== memo) {
+        editor.commands.setContent(memo);
       }
     }
-  }, [isLoaded, editor, htmlContent]);
+  }, [isLoaded, editor, memo]);
 
   // Next.jsのハイドレーションエラー防止：クライアント側での準備ができるまでは何も出さない
   if (!isLoaded || !editor) {
