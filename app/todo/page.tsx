@@ -1,13 +1,18 @@
-import React, { useMemo, useState } from 'react';
-import { useLocalStorageTodo, Todo } from '@/hooks/useLocalStorageTodo';
+import { Todo } from '@/hooks/useDashboardData';
+import React, { Dispatch, SetStateAction, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function TodoDashboard() {
+type todoProps = {
+  todos: Todo[];
+  setTodos: Dispatch<SetStateAction<Todo[]>>;
+  isLoaded: boolean;
+}
+
+export default function TodoDashboard({todos, setTodos, isLoaded}: todoProps) {
 
   // 辞書ライブラリ
   const {t} = useTranslation();
 
-  const [todos, setTodos, isLoaded] = useLocalStorageTodo();
   const [newText, setNewText] = useState('');
 
   // 1. ToDoの新規追加
