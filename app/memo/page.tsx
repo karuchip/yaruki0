@@ -48,12 +48,12 @@ export default function MemoEditor({memo, setMemo, isLoaded}:MemoProps) {
       <div className="flex gap-3 mb-3 text-sm items-center justify-between border-b border-gray-100 pb-2 shrink-0">
         <span className="font-bold text-[#5c988e] text-base">{t('memo.title')}</span>
 
-        <div className="flex gap-3">
+        <div className="flex gap-1">
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleBold().run()}
             className={`cursor-pointer px-2 py-1 rounded text-xs transition-colors ${
-              editor.isActive('bold') ? 'bg-[#5c988e]/10 text-[#5c988e] font-bold' : 'text-gray-400 hover:text-gray-600'
+              editor.isActive('bold') ? 'bg-[#5c988e]/10 text-[#5c988e] font-bold' : 'text-gray-400 hover:text-[#5c988e]'
             }`}
           >
             {t('memo.bold')}
@@ -63,7 +63,7 @@ export default function MemoEditor({memo, setMemo, isLoaded}:MemoProps) {
             type="button"
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             className={`cursor-pointer px-2 py-1 rounded text-xs transition-colors ${
-              editor.isActive('bulletList') ? 'bg-[#5c988e]/10 text-[#5c988e] font-bold' : 'text-gray-400 hover:text-gray-600'
+              editor.isActive('bulletList') ? 'bg-[#5c988e]/10 text-[#5c988e] font-bold' : 'text-gray-400 hover:text-[#5c988e]'
             }`}
           >
             {t('memo.list')}
