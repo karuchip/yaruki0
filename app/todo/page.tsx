@@ -95,7 +95,9 @@ export default function TodoDashboard({todos, setTodos, isLoaded}: todoProps) {
             onChange={(e) => setNewText(e.target.value)}
             className="flex-grow p-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-[#5c988e]"
           />
-          <button type="submit" className="px-4 py-2 bg-[#5c988e] text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity cursor-pointer shrink-0">{t('todo.add')}</button>
+          <button type="submit" className="px-4 py-2 bg-[#5c988e] text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity cursor-pointer shrink-0">
+            {t('todo.add')}
+          </button>
         </form>
       </div>
 
@@ -147,9 +149,9 @@ export default function TodoDashboard({todos, setTodos, isLoaded}: todoProps) {
       </ul>
 
       {/* 合計時間の表示 */}
-      <div className="pt-3 border-t border-gray-200 flex justify-between font-bold text-sm text-slate-700 shrink-0 mt-auto">
-        <span>{t('todo.totalTime')}</span>
-        <span className="text-[#5c988e] font-mono">{formatTime(totalMinutes)}</span>
+      <div className="pt-3 border-t border-gray-200 flex justify-between font-bold text-m text-slate-700 shrink-0 mt-auto">
+        <span className="text-[#6FB7AB]">{t('todo.totalTime')}</span>
+        <span className="text-[#6FB7AB] font-mono">{formatTime(totalMinutes)}</span>
       </div>
     </div>
   );
