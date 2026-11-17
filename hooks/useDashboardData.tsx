@@ -25,25 +25,31 @@ interface DashboardStorageData {
 
 export function useDashboardData() {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [currentTime, setCurrentTime] = useState<number>(0);
 
   // 初回マウント時の自動保存を防ぐためのフラグ
   const initialMount = useRef(true);
 
   // 1. 初期化時にローカルストレージから復元
   const [data, setData] = useState<DashboardStorageData>(() => {
+
     const now = Date.now();
     const defaultData = {
       memo: { htmlContent: '', createdAt: now },
       todo: { todos: [], createdAt: now },
     };
 
+    // もし今windowが存在しない(サーバー側で実行されている)のなら、localStorageを参照せず空のdefaultデータを返す
     if (typeof window === 'undefined') return defaultData;
 
+    // localStorageからデータを取得
     const raw = localStorage.getItem(STORAGE_KEY);
+
+    // もしlocalStorageにデータがなければ、空のdefaultデータを返す
     if (!raw) return defaultData;
 
     try {
+
+      // parsedは、ただの文字列をオブジェクト形式に復元したもの。localStorageには文字列しか保存できない
       const parsed: DashboardStorageData = JSON.parse(raw);
       const memoCreatedAt = parsed.memo?.createdAt || 0;
       const todoCreatedAt = parsed.todo?.createdAt || 0;
@@ -78,12 +84,8 @@ export function useDashboardData() {
   useEffect(() => {
     const setState = () => {
       setIsLoaded(true);
-      setCurrentTime(Date.now());
     }
     setState();
-
-    const timer = window.setInterval(() => setCurrentTime(Date.now()), 1000);
-    return () => window.clearInterval(timer);
   }, []);
 
   // 2. データが更新されたらローカルストレージに保存

@@ -38,10 +38,6 @@ const Menu = ({expiresAt}:MenuProps) => {
 
 
   // 残り時間を計算
-
-
-
-
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event.type === 'keydown' &&
