@@ -31,6 +31,7 @@ const Dashboard = () => {
   // localStorage保存データ取得（24時間経過後削除）
   const { memo, setMemo, todos, setTodos, isLoaded, expiresAt } = useDashboardData();
 
+
   return (
     <div className="h-screen w-screen bg-slate-50 text-slate-800 flex flex-col font-sans overflow-hidden">
       {/* アプリケーションヘッダー */}
@@ -52,7 +53,7 @@ const Dashboard = () => {
             <button
               onClick={() => setActiveTab('timer')}
               className={`px-3 py-1.5 rounded-lg transition-all ${
-                activeTab === 'timer' ? 'bg-white text-[#5c988e] shadow-sm font-bold' : 'text-gray-500'
+                activeTab === 'timer' ? 'bg-white text-[#5c988e] shadow-sm bold' : 'text-gray-500'
               }`}
             >
               {t('time.title')}
