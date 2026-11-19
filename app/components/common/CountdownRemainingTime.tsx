@@ -58,7 +58,7 @@ export function CountdownRemainingTime({ expiresAt }: CountdownTimerProps) {
   const textColor = isUrgent ? 'text-red-600 font-bold' : 'text-gray-700';
 
   return (
-    <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 shadow-sm">
+    <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 shadow-sm mx-3">
       <div className="flex justify-between items-center mb-1.5 text-xs">
         <span className="text-gray-500 font-medium">データ自動削除まで</span>
         <span className={textColor}>{formatTime(remainingTime)}</span>
