@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Box, Divider } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -26,17 +26,6 @@ const Menu = ({expiresAt}:MenuProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
 
-  // 時間を取得
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const timerId = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-    return () => clearInterval(timerId);
-  }, []);
-
-
   // 残り時間を計算
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -56,7 +45,7 @@ const Menu = ({expiresAt}:MenuProps) => {
   };
 
   const navLinks = [
-    { label: "1", href: "/", icon: "HomeIcon" },
+    { label: "記録を出力する", href: "/showPDF", icon: "HomeIcon" },
     { label: "2", href: "/", icon: "LocalLibraryIcon" },
     { label: "3", href: "/", icon: "CropOriginalIcon" },
     { label: "4", href: "/", icon: "LockIcon" },
