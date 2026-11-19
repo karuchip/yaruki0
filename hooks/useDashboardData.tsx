@@ -137,7 +137,7 @@ export function useDashboardData() {
 
   // 期限の計算（一番直近のアクティビティを基準にする）
   const latestCreatedAt = Math.max(data.memo.createdAt, data.todo.createdAt);
-  const expiresAt = latestCreatedAt > 0 ? latestCreatedAt + TWENTY_FOUR_HOURS : Date.now() + TWENTY_FOUR_HOURS;
+  const expiresAt = latestCreatedAt + TWENTY_FOUR_HOURS;
 
   return {
     memo: data.memo.htmlContent,
